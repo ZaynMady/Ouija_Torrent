@@ -12,6 +12,7 @@ namespace ouija{
 
 
 std::vector <unsigned char> encode_str(std::string &decoded_data);
+std::vector <unsigned char> encode_int(int &decoded_data);
 
 std::vector<unsigned char> encode(std::map<std::string, bencodeelement> &decoded_data);
 

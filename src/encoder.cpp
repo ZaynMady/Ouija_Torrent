@@ -18,6 +18,21 @@ std::vector<unsigned char> ouija::encode_str(std::string &decoded_data)
     return encoded_data;
 }
 
+std::vector<unsigned char> ouija::encode_int(int &decoded_data)
+{
+    std::vector<unsigned char> encoded_data; 
+
+    encoded_data.push_back('i');
+
+    for (auto _char : std::to_string(decoded_data))
+    {
+        encoded_data.push_back(_char);
+    }
+
+    encoded_data.push_back('e');
+    return std::vector<unsigned char>(encoded_data);
+}
+
 std::vector<unsigned char> ouija::encode(std::map<std::string, bencodeelement> &decoded_data)
 {
     std::vector<unsigned char> encoded_data; 
