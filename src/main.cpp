@@ -1,7 +1,14 @@
 #include "Ouija/bdecode.h"
 #include <iostream>
 #include <cstring>
-#include <libtorrent/bencode.hpp>
+#include "Ouija/encoder.h"
+#include "Ouija/encrypter.h"
+#include <fstream>
+#include <winsock.h>
+
+//defining client name and version
+#define CLIENT_NAME "Ouija"
+#define CLIENT_VERSION "0.01"
 
 
 int main(int argc, char * argv[])
@@ -12,18 +19,25 @@ int main(int argc, char * argv[])
     }
     else
     {
-        if(std::strcmp(argv[1], "info") == 0)
+        if(std::strcmp(argv[1], "decode") == 0)
         {
             //getting the file 
             std::string file_path = argv[2];
-            auto dict = decode(file_path);
-            write_info_file(dict);
+            auto dict = ouija::decode(file_path);
+            ouija::write_info_file(dict);
+        }
+        else if(std::strcmp(argv[1], "compute_hash") == 0)
+        {
+            std::string filepath = argv[2];
+            auto decoded_data = ouija::decode(filepath);
+            auto info_dict = decoded_data["info"].get_dict();
+            auto info_hash = encrpyt_info_hash(info_dict);
+            std::cout << info_hash;
         }
         else
         {
             std::cout << "Unexpected Command\n";
         }
-
     }
 
 

@@ -1,17 +1,13 @@
 #ifndef BDECODE_H
 #define BDECODE_H
 
-
-
-
-
-
 //DECODER
 #include <vector>
 #include <string>
 #include "bencodeelement.h"
 #include <map>
 
+namespace ouija{
 //function to decode a string 
 std::string decode_str(std::vector<unsigned char> encoded_data, size_t & position);
 //function to decode an int
@@ -28,7 +24,7 @@ std::vector<unsigned char> decode_binary(std::vector<unsigned char> encoded_data
 std::map<std::string, bencodeelement> decode(std::string &file_path);
 
 void write_info_file(std::map<std::string, bencodeelement> decoded_dict);
-
+}
 
 
 
